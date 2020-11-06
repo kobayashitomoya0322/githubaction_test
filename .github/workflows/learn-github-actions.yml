@@ -14,9 +14,7 @@ jobs:
           PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.SSH_TERMINAL_CMD }}")
           expect -c "
           set timeout 3
-          spawn ssh -t -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.SSH_TERMINAL_CMD}} \"
-          expect \"Password:\"
-          send \"{{ secrets.JENKINS_PWD }}\n\"
+          spawn ssh -ti ~/.ssh/id_rsa_kobayashi -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.SSH_TERMINAL_CMD }}\"
           expect \"Password:\"
           send \"${{ secrets.SSH_PSW }}\n\"
           interact

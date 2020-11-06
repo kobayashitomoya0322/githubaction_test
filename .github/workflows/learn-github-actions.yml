@@ -9,6 +9,7 @@ jobs:
       - run: npm install -g bats
       - run: sudo apt install expect
       - run: bats -v
+      - run: pwd
       - run: | 
           PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.SSH_TERMINAL_CMD }}")
           expect -c "
@@ -20,3 +21,4 @@ jobs:
           send \"${{ secrets.SSH_PSW }}\n\"
           interact
           "
+      - run: pwd

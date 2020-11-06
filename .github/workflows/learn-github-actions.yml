@@ -7,7 +7,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
       - run: npm install -g bats
-      - run: npm install -g expect
+      - run: npm install expect
       - run: bats -v
       - run: | 
           PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.SSH_TERMINAL_CMD }}")

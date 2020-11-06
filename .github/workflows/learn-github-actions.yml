@@ -14,9 +14,9 @@ jobs:
           PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.SSH_TERMINAL_CMD }}")
           expect -c "
           set timeout 3
-          spawn ssh -t -L 10020:35.190.225.93:${PORT} money-book@stg1-jenkins01.ebisubook.com \"${{ secrets.SSH_TERMINAL_CMD}} \"
+          spawn ssh -t -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.SSH_TERMINAL_CMD}} \"
           expect \"Password:\"
-          send \"stgebisu\n\"
+          send \"{{ secrets.JENKINS_PWD }}\n\"
           expect \"Password:\"
           send \"${{ secrets.SSH_PSW }}\n\"
           interact

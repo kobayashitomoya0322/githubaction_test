@@ -8,4 +8,14 @@ jobs:
       - uses: actions/setup-node@v1
       - run: npm install -g bats
       - run: bats -v
-      - run: ${{ secrets.SSH_COMMAND }}
+      - run: | 
+          PORT=$(cut -d ' ' -f 4 <<< ${{ SSH_TERMINAL_CMD }})
+          expect -c "
+          set timeout 3
+          spawn ssh -t -L 10020:35.190.225.93:${PORT} money-book@stg1-jenkins01.ebisubook.com \"${{ SSH_TERMINAL_CMD}} \"
+          expect \"Password:\"
+          send \"stgebisu\n\"
+          expect \"Password:\"
+          send \"${{SSH_PSW}}\n\"
+          interact
+          "

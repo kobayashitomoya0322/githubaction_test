@@ -15,7 +15,7 @@ jobs:
           spawn ssh -ti secret_key -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}\"
           expect \"Password:\"
           send \"${{ secrets.ESTBASIC_STAGING_SSH_PSW }}\n\"
+          expect \"$\"
+          send \"pwd\"
           interact
-          pwd
-          exit 0
           "

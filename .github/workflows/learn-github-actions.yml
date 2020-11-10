@@ -5,18 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: npm install -g bats
       - run: sudo apt install expect
-      - run: bats -v
       - run: pwd
       - run: |
           echo "${{ secrets.SECRET_KEY }}" > secret_key 
-          PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.SSH_TERMINAL_CMD }}")
+          PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}")
           expect -c "
           set timeout 3
-          spawn ssh -ti secret_key -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.SSH_TERMINAL_CMD }}\"
+          spawn ssh -ti secret_key -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}\"
           expect \"Password:\"
-          send \"${{ secrets.SSH_PSW }}\n\"
+          send \"${{ secrets.ESTBASIC_STAGING_SSH_PSW }}\n\"
+          pwd
           interact
           "
+      - run: pwd

@@ -11,7 +11,6 @@ jobs:
       - run: |
           echo "${{ secrets.SECRET_KEY }}" > secret_key 
           PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}")
-          sshpass -p ${{ secrets.ESTBASIC_STAGING_SSH_PSW }} ssh -ti secret_key -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}\"
+          sshpass -p ${{ secrets.ESTBASIC_STAGING_SSH_PSW }} ssh -t -ti secret_key -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}\"
           pwd
-          "
       - run: pwd

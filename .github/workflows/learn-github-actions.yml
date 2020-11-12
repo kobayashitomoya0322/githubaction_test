@@ -11,4 +11,4 @@ jobs:
           echo "${{ secrets.SECRET_KEY }}" > secret_key
           echo "${{ secrets.ALL_SECRET_KEY }}" > all_secret_key 
           PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}")
-          ssh -ti secret_key -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }} -i all_secret_key\"
+          ssh -ti secret_key -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }} -ti -L all_secret_key\"

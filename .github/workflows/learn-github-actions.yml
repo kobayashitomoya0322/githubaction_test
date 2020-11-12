@@ -8,14 +8,7 @@ jobs:
       - run: sudo apt install expect
       - run: pwd
       - run: |
-          echo "${{ secrets.SECRET_KEY }}" > secret_key 
+          echo "${{ secrets.SECRET_KEY }}" > secret_key
+          echo "${{ secrets.ALL_SECRET_KEY }}" > all_secret_key 
           PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}")
-          expect -c "
-          set timeout 3
-          spawn ssh -ti secret_key -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}\"
-          expect \"Password:\"
-          send \"${{ secrets.ESTBASIC_STAGING_SSH_PSW }}\n\"
-          expect \"$\"
-          send \"pwd\"
-          interact
-          "
+          ssh -ti secret_key -L ${{ secrets.JENKINS_IP }}:${PORT} ${{ secrets.JENKINS_DOMAIN }} \"${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }} -i all_secret_key\"

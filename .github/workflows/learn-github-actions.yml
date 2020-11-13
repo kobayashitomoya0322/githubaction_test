@@ -7,8 +7,14 @@ jobs:
       - uses: actions/checkout@v2
       - run: sudo apt install expect
       - run: pwd
+      - name: Make ssh config
+        run: |
+           touch ~/.ssh/config
+           echo "Host serverA" >> ~/.ssh/config
+           echo "HostName" >> ~/.ssh/config
+           
       - run: |
           echo "${{ secrets.SECRET_KEY }}" > secret_key
           echo "${{ secrets.ALL_SECRET_KEY }}" > all_secret_key 
           PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}")
-          ssh -o -i all_secret_key ProxyCommand="ssh -p ${PORT} -i secret_key -W %h:%p ${{ secrets.JENKINS_DOMAIN }}" fofojoku@35.190.225.93 -p ${PORT}
+          ssh -p ${PORT} -i all_secret_key -o ProxyCommand="ssh -L {{ $JENKINS_IP }}:${PORT} {{ JENKINS_DOMAIN }} -i secret_key -W %h:%p" fofojoku@35.190.225.93

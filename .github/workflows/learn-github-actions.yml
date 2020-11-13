@@ -7,13 +7,8 @@ jobs:
       - uses: actions/checkout@v2
       - run: sudo apt install expect
       - run: pwd
-      - name: Make ssh config
+      - name: Proxy ssh
         run: |
-           touch ~/.ssh/config
-           echo "Host serverA" >> ~/.ssh/config
-           echo "HostName" >> ~/.ssh/config
-           
-      - run: |
           echo "${{ secrets.SECRET_KEY }}" > secret_key
           echo "${{ secrets.ALL_SECRET_KEY }}" > all_secret_key 
           PORT=$(cut -d ' ' -f 4 <<< "${{ secrets.ESTBASIC_STAGING_SSH_TERMINAL_CMD }}")

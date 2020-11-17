@@ -21,11 +21,12 @@ jobs:
           echo "HostName {{secrets.JENKINS_HOST}}" >> /home/runner/.ssh/config
           echo "User {{secrets.JENKINS_USER}}" >> /home/runner/.ssh/config
           echo "IdentityFile jenkins_secret_key" >> /home/runner/.ssh/config
+          echo "LocalForward {{secrets.JENKINS_PORT}} {{secrets.JENKINS_HOST}}:{{secrets.JENKINS_PORT}}" >> /home/runner/.ssh/config
           echo "Host serverB" >> /home/runner/.ssh/config
           echo "HostName {{secrets.KINSTA_HOST}}" >> /home/runner/.ssh/config
           echo "User {{secrets.JENKINS_USER}}" >> /home/runner/.ssh/config
           echo "IdentityFile kinsta_secret_key" >> /home/runner/.ssh/config
-          echo "ProxyCommand ssh -W %h:%p serverA" >> /home/runner/.ssh/config
+          echo "ProxyCommand ssh -CW %h:%p serverA" >> /home/runner/.ssh/config
           echo "LocalForward {{secrets.LOCAL_FORWARD_PORT}} {{secrets.LOCAL_FORWARD_IP}}:{{secrets.PORT}}" >> /home/runner/.ssh/config
       - name: Proxy ssh
         run: |

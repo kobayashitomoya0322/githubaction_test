@@ -16,7 +16,7 @@ jobs:
           echo "Host serverA" >> /home/runner/.ssh/config
           echo "HostName {{secrets.JENKINS_HOST}}" >> /home/runner/.ssh/config
           echo "User {{secrets.JENKINS_USER}}" >> /home/runner/.ssh/config
-          echo "Port {{secrets.PORT}}" >> /home/runner/.ssh/config
+          echo "LocalForward {{secrets.LOCAL_FORWARD_PORT}} {{LOCAL_FORWARD_IP}}:{{secrets.PORT}}" >> /home/runner/.ssh/config
           echo "IdentityFile jenkins_secret_key" >> /home/runner/.ssh/config
           echo "Host serverB" >> /home/runner/.ssh/config
           echo "HostName {{secrets.KINSTA_HOST}}" >> /home/runner/.ssh/config

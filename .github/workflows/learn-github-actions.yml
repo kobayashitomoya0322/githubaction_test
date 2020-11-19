@@ -41,7 +41,7 @@ jobs:
 
       - name: Proxy ssh
         run: |
-          ssh kinsta -p ${{ secrets.PORT }}
+          ssh -t -t kinsta -p ${{ secrets.PORT }}
           pwd
           exit
 

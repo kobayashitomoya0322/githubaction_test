@@ -39,5 +39,5 @@ jobs:
 
       - name: Proxy ssh
         run: |
-          ssh -v -T kinsta "pwd"
+          ssh -vvv -T kinsta "pwd"
 

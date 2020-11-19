@@ -29,7 +29,7 @@ jobs:
           echo "User ${{ secrets.KINSTA_USER }}" >> /home/runner/.ssh/config
           echo "Port ${{ secrets.PORT }}" >> /home/runner/.ssh/config
           echo "IdentityFile kinsta_secret_key" >> /home/runner/.ssh/config
-          echo "ProxyCommand ssh -CW %h:%p jenkins" >> /home/runner/.ssh/config
+          echo "ProxyJump jenkins" >> /home/runner/.ssh/config
           
       - name: remove known_hosts
         run: |
@@ -37,7 +37,7 @@ jobs:
 
       - name: Proxy ssh
         run: |
-          ssh -t -t kinsta
+          ssh kinsta -p ${{ secrets.PORT }}
           pwd
           exit
 

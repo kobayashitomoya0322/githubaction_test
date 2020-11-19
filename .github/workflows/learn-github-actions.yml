@@ -8,18 +8,18 @@ jobs:
       - name: Make jenkins ssh private key
         run: | 
           echo "${{ secrets.JENKINS_SECRET_KEY }}" > jenkins_secret_key
-          chmod 700 jenkins_secret_key
+          chmod 600 jenkins_secret_key
       - name: Make kinsta ssh private key
         run: |
           echo "${{ secrets.KINSTA_SECRET_KEY }}" > kinsta_secret_key
-          chmod 700 kinsta_secret_key
+          chmod 600 kinsta_secret_key
       - name: Make ssh config
         run: |
           mkdir -p /home/runner/.ssh
           touch /home/runner/.ssh/config
           echo "Host jenkins" >> /home/runner/.ssh/config
-          echo "HostName {{secrets.JENKINS_HOST}}" >> /home/runner/.ssh/config
-          echo "User {{secrets.JENKINS_USER}}" >> /home/runner/.ssh/config
+          echo "HostName ${{ secrets.JENKINS_HOST }}" >> /home/runner/.ssh/config
+          echo "User ${{ secrets.JENKINS_USER }}" >> /home/runner/.ssh/config
           echo "IdentityFile jenkins_secret_key" >> /home/runner/.ssh/config
 
       - name: Proxy ssh

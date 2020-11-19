@@ -27,12 +27,12 @@ jobs:
           echo "ServerAliveInterval 60" >> /home/runner/.ssh/config
           echo "ServerAliveCountMax 5" >> /home/runner/.ssh/config
           echo "StrictHostKeyChecking no" >> /home/runner/.ssh/config
-          echo "UserKnownHostsFile=/dev/null" >> /home/runner/.ssh/config
+          echo "UserKnownHostsFile /dev/null" >> /home/runner/.ssh/config
           echo "User ${{ secrets.KINSTA_USER }}" >> /home/runner/.ssh/config
           echo "Port ${{ secrets.PORT }}" >> /home/runner/.ssh/config
           echo "IdentityFile kinsta_secret_key" >> /home/runner/.ssh/config
           echo "StrictHostKeyChecking no" >> /home/runner/.ssh/config
-          echo "UserKnownHostsFile=/dev/null" >> /home/runner/.ssh/config
+          echo "UserKnownHostsFile /dev/null" >> /home/runner/.ssh/config
           echo "ProxyJump jenkins" >> /home/runner/.ssh/config
 
       - name: Proxy ssh

@@ -8,11 +8,11 @@ jobs:
       - name: Make jenkins ssh private key
         run: | 
           echo "${{ secrets.JENKINS_SECRET_KEY }}" > jenkins_secret_key
-          chmod 600 jenkins_secret_key
+          chmod 700 jenkins_secret_key
       - name: Make kinsta ssh private key
         run: |
           echo "${{ secrets.KINSTA_SECRET_KEY }}" > kinsta_secret_key
-          chmod 600 kinsta_secret_key
+          chmod 700 kinsta_secret_key
       - name: Make ssh config
         run: |
           mkdir -p /home/runner/.ssh

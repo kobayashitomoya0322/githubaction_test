@@ -24,6 +24,8 @@ jobs:
           echo "LocalForward ${{ secrets.LOCAL_FORWARD_PORT }} ${{ secrets.LOCAL_FORWARD_IP }}:${{ secrets.PORT }}" >> /home/runner/.ssh/config
           echo "Host kinsta" >> /home/runner/.ssh/config
           echo "HostName ${{ secrets.KINSTA_HOST }}" >> /home/runner/.ssh/config
+          echo "ServerAliveInterval 60" >> /home/runner/.ssh/config
+          echo "ServerAliveCountMax 5" >> /home/runner/.ssh/config
           echo "User ${{ secrets.KINSTA_USER }}" >> /home/runner/.ssh/config
           echo "Port ${{ secrets.PORT }}" >> /home/runner/.ssh/config
           echo "IdentityFile kinsta_secret_key" >> /home/runner/.ssh/config

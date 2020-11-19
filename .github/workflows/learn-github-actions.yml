@@ -13,6 +13,8 @@ jobs:
           echo "${{ secrets.KINSTA_SECRET_KEY }}" > kinsta_secret_key
       - name: Make ssh config
         run: |
+          chmod 600 kinsta_secret_key
+          chmod 600 jenkins_secret_key
           mkdir -p /home/runner/.ssh
           touch /home/runner/.ssh/config
           echo "Host jenkins" >> /home/runner/.ssh/config

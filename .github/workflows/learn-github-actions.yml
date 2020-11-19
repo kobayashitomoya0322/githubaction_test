@@ -43,5 +43,4 @@ jobs:
         run: |
           ssh -t -t kinsta -p ${{ secrets.PORT }}
           pwd
-          exit
 

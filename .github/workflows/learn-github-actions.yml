@@ -34,13 +34,8 @@ jobs:
           echo "StrictHostKeyChecking no" >> /home/runner/.ssh/config
           echo "UserKnownHostsFile=/dev/null" >> /home/runner/.ssh/config
           echo "ProxyJump jenkins" >> /home/runner/.ssh/config
-          
-      - name: remove known_hosts
-        run: |
-          rm -rf /home/runner/.ssh/known_hosts
 
       - name: Proxy ssh
         run: |
-          ssh -t -t kinsta -p ${{ secrets.PORT }}
-          pwd
+          ssh -t -t kinsta -p ${{ secrets.PORT }} "pwd"
 

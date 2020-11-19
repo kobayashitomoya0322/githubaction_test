@@ -16,6 +16,7 @@ jobs:
           chmod 600 kinsta_secret_key
           chmod 600 jenkins_secret_key
           mkdir -p /home/runner/.ssh
+          chmod 700 /home/runner/.ssh 
           touch /home/runner/.ssh/config
           echo "Host jenkins" >> /home/runner/.ssh/config
           echo "HostName ${{ secrets.JENKINS_HOST }}" >> /home/runner/.ssh/config
@@ -34,6 +35,7 @@ jobs:
           echo "StrictHostKeyChecking no" >> /home/runner/.ssh/config
           echo "UserKnownHostsFile /dev/null" >> /home/runner/.ssh/config
           echo "ProxyJump jenkins" >> /home/runner/.ssh/config
+          chmod 600 /home/runner/.ssh/*
 
       - name: Proxy ssh
         run: |

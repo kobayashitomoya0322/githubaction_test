@@ -21,6 +21,8 @@ jobs:
           echo "Host jenkins" >> /home/runner/.ssh/config
           echo "HostName ${{ secrets.JENKINS_HOST }}" >> /home/runner/.ssh/config
           echo "User ${{ secrets.JENKINS_USER }}" >> /home/runner/.ssh/config
+          echo "ServerAliveInterval 60" >> /home/runner/.ssh/config
+          echo "ServerAliveCountMax 5" >> /home/runner/.ssh/config
           echo "IdentityFile /home/runner/.ssh/id_rsa_jenkins" >> /home/runner/.ssh/config
           echo "LocalForward ${{ secrets.LOCAL_FORWARD_PORT }} ${{ secrets.LOCAL_FORWARD_IP }}:${{ secrets.PORT }}" >> /home/runner/.ssh/config
           echo "Host kinsta" >> /home/runner/.ssh/config

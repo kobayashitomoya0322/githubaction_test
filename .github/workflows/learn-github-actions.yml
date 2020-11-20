@@ -7,37 +7,37 @@ jobs:
       - uses: actions/checkout@v2
       - name: Make jenkins ssh private key
         run: | 
-          mkdir -p /home/runner/.ssh
-          echo "${{ secrets.JENKINS_SECRET_KEY }}" > /home/runner/.ssh/id_rsa_jenkins
+          mkdir -p ~/.ssh
+          echo "${{ secrets.JENKINS_SECRET_KEY }}" > ~/.ssh/id_rsa_jenkins
       - name: Make kinsta ssh private key
         run: |
-          echo "${{ secrets.KINSTA_SECRET_KEY }}" > /home/runner/.ssh/id_rsa_kinsta
+          echo "${{ secrets.KINSTA_SECRET_KEY }}" > ~/.ssh/id_rsa_kinsta
       - name: Make ssh config
         run: |
-          chmod 600 /home/runner/.ssh/id_rsa_jenkins
-          chmod 600 /home/runner/.ssh/id_rsa_kinsta
-          chmod 700 /home/runner/.ssh 
-          touch /home/runner/.ssh/config
-          echo "Host jenkins" >> /home/runner/.ssh/config
-          echo "HostName ${{ secrets.JENKINS_HOST }}" >> /home/runner/.ssh/config
-          echo "User ${{ secrets.JENKINS_USER }}" >> /home/runner/.ssh/config
-          echo "ServerAliveInterval 60" >> /home/runner/.ssh/config
-          echo "ServerAliveCountMax 5" >> /home/runner/.ssh/config
-          echo "IdentityFile /home/runner/.ssh/id_rsa_jenkins" >> /home/runner/.ssh/config
-          echo "LocalForward ${{ secrets.LOCAL_FORWARD_PORT }} ${{ secrets.LOCAL_FORWARD_IP }}:${{ secrets.PORT }}" >> /home/runner/.ssh/config
-          echo "Host kinsta" >> /home/runner/.ssh/config
-          echo "HostName ${{ secrets.KINSTA_HOST }}" >> /home/runner/.ssh/config
-          echo "ServerAliveInterval 60" >> /home/runner/.ssh/config
-          echo "ServerAliveCountMax 5" >> /home/runner/.ssh/config
-          echo "StrictHostKeyChecking no" >> /home/runner/.ssh/config
-          echo "UserKnownHostsFile /dev/null" >> /home/runner/.ssh/config
-          echo "User ${{ secrets.KINSTA_USER }}" >> /home/runner/.ssh/config
-          echo "Port ${{ secrets.PORT }}" >> /home/runner/.ssh/config
-          echo "IdentityFile /home/runner/.ssh/id_rsa_kinsta" >> /home/runner/.ssh/config
-          echo "StrictHostKeyChecking no" >> /home/runner/.ssh/config
-          echo "UserKnownHostsFile /dev/null" >> /home/runner/.ssh/config
-          echo "ProxyJump jenkins" >> /home/runner/.ssh/config
-          chmod 600 /home/runner/.ssh/*
+          chmod 600 ~/.ssh/id_rsa_jenkins
+          chmod 600 ~/.ssh/id_rsa_kinsta
+          chmod 700 ~/.ssh 
+          touch ~/.ssh/config
+          echo "Host jenkins" >> ~/.ssh/config
+          echo "HostName ${{ secrets.JENKINS_HOST }}" >> ~/.ssh/config
+          echo "User ${{ secrets.JENKINS_USER }}" >> ~/.ssh/config
+          echo "ServerAliveInterval 60" >> ~/.ssh/config
+          echo "ServerAliveCountMax 5" >> ~/.ssh/config
+          echo "IdentityFile ~/.ssh/id_rsa_jenkins" >> ~/.ssh/config
+          echo "LocalForward ${{ secrets.LOCAL_FORWARD_PORT }} ${{ secrets.LOCAL_FORWARD_IP }}:${{ secrets.PORT }}" >> ~/.ssh/config
+          echo "Host kinsta" >> ~/.ssh/config
+          echo "HostName ${{ secrets.KINSTA_HOST }}" >> ~/.ssh/config
+          echo "ServerAliveInterval 60" >> ~/.ssh/config
+          echo "ServerAliveCountMax 5" >> ~/.ssh/config
+          echo "StrictHostKeyChecking no" >> ~/.ssh/config
+          echo "UserKnownHostsFile /dev/null" >> ~/.ssh/config
+          echo "User ${{ secrets.KINSTA_USER }}" >> ~/.ssh/config
+          echo "Port ${{ secrets.PORT }}" >> ~/.ssh/config
+          echo "IdentityFile ~/.ssh/id_rsa_kinsta" >> ~/.ssh/config
+          echo "StrictHostKeyChecking no" >> ~/.ssh/config
+          echo "UserKnownHostsFile /dev/null" >> ~/.ssh/config
+          echo "ProxyJump jenkins" >> ~/.ssh/config
+          chmod 600 ~/.ssh/*
 
       - name: Proxy ssh
         run: |

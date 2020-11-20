@@ -41,5 +41,5 @@ jobs:
 
       - name: Proxy ssh
         run: |
-          ssh -vvv -T kinsta "pwd"
+          ssh -vvv -T jenkins "pwd"
 
